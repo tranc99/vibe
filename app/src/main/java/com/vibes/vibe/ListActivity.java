@@ -1,39 +1,62 @@
 package com.vibes.vibe;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Handler;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.List;
 
 
-public class ListActivity extends ActionBarActivity {
+public class ListActivity extends Activity {
+
+    private EditText searchInput;
+    private ListView videosFound;
+
+    private Handler handler;
+    private List<VideoItem> searchResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        searchInput = (EditText) findViewById(R.id.search_text);
+        videosFound = (ListView) findViewById(R.id.videos);
+
+        handler = new Handler();
+
+        searchInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE) {
+                    searchOnYoutube(v.getText().toString());
+                    return false;
+                }
+                return true;
+            }
+        });
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_list, menu);
-        return true;
+    private void searchOnYoutube(final String keywords) {
+        new Thread() {
+            public void run() {
+                GetYoutube butler = new GetYoutube(ListActivity.this);
+                searchResults = butler.search(keywords);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateVideosFound();
+                    }
+                });
+            }
+        }.start();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
