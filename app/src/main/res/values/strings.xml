@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Vibe</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="search_txt">Lookup!</string>
+    <string name="err">Youtube went on a wild goose chase, thanks.</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_list">Listing</string>
+    <string name="title_activity_player">PlayerActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
