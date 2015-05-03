@@ -22,7 +22,7 @@ public class GetYoutube {
     private YouTube youTube;
     private YouTube.Search.List query;
 
-    public static final String KEY = "AIzaSyCi1AvuAlNgTIs5kLg12_i4bPF21-cwnZM";
+    public static final String KEY = "AIzaSyCkbNQiYCgg_QWE4QiwWxYI_ICGcTXWVXs";
 
     public GetYoutube(Context context) {
         youTube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
