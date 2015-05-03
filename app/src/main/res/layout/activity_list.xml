@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/search_txt"
-        android:id="@+id/search_text"
-        android:singleLine="true"
-        />
-
-    <ListView
-        android:id="@+id/videos"
-        android:dividerHeight="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ListView>
+    <WebView
+        android:id="@+id/web_engine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"></WebView>
 </LinearLayout>
